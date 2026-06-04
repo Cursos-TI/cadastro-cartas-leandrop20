@@ -4,7 +4,7 @@
 // Tema 1 - Cadastro das cartas
 // Objetivo: No nível novato você deve criar as cartas representando as cidades utilizando scanf para entrada de dados e printf para exibir as informações.
 
-float calcularDensidadePopulacional(int population, float area) {
+float calculatePopulationDensity(int population, float area) {
 	if (area == 0) {
 		return 0; // Evitar divisão por zero
 	}
@@ -12,7 +12,7 @@ float calcularDensidadePopulacional(int population, float area) {
 	return population / area;
 }
 
-float calcularPibPerCapita(float pib, int population) {
+float calculatePibPerCapita(float pib, int population) {
 	if (population == 0) {
 		return 0; // Evitar divisão por zero
 	}
@@ -31,6 +31,7 @@ int main() {
 	int nTouristAttractions;
 	float populationDensity;
 	float pibPerCapita;
+	int superPower;
 
 	char state2;
 	char code2[10];
@@ -41,6 +42,7 @@ int main() {
 	int nTouristAttractions2;
 	float populationDensity2;
 	float pibPerCapita2;
+	int superPower2;
 
 	// Área para entrada de dados
 	printf("Digite as informações da primeira carta:\n");
@@ -77,10 +79,10 @@ int main() {
 	printf("Número de Pontos Turísticos: ");
 	scanf("%d", &nTouristAttractions2);
 
-	populationDensity = calcularDensidadePopulacional(population, area);
-	pibPerCapita = calcularPibPerCapita(pib, population);
-	populationDensity2 = calcularDensidadePopulacional(population2, area2);
-	pibPerCapita2 = calcularPibPerCapita(pib2, population2);
+	populationDensity = calculatePopulationDensity(population, area);
+	pibPerCapita = calculatePibPerCapita(pib, population);
+	populationDensity2 = calculatePopulationDensity(population2, area2);
+	pibPerCapita2 = calculatePibPerCapita(pib2, population2);
 
 	// Área para exibição dos dados
 	printf("\nPrimeira Carta:\n");
@@ -104,6 +106,38 @@ int main() {
 	printf("Número de Pontos Turísticos: %d\n", nTouristAttractions2);
 	printf("Densidade Populacional: %.2f\n", populationDensity2);
 	printf("PIB per Capita: %.2f\n", pibPerCapita2);
+
+	printf("\nComparação entre as cartas:\n");
+
+	int populationComparison = population > population2;
+	int populationWinner = populationComparison ? 1 : 2;
+	printf("População: Carta %d venceu (%d) \n", populationWinner, populationComparison);
+
+	int areaComparison = area > area2;
+	int areaWinner = areaComparison ? 1 : 2;
+	printf("Área: Carta %d venceu (%.2f) \n", areaWinner, areaComparison);
+
+	int pibComparison = pib > pib2;
+	int pibWinner = pibComparison ? 1 : 2;
+	printf("PIB: Carta %d venceu (%.2f) \n", pibWinner, pibComparison);
+
+	int touristAttractionsComparison = nTouristAttractions > nTouristAttractions2;
+	int touristAttractionsWinner = touristAttractionsComparison ? 1 : 2;
+	printf("Número de Pontos Turísticos: Carta %d venceu (%d) \n", touristAttractionsWinner, touristAttractionsComparison);
+
+	int populationDensityComparison = populationDensity < populationDensity2; // Invertido para densidade
+	int populationDensityWinner = populationDensityComparison ? 1 : 2;
+	printf("Densidade Populacional: Carta %d venceu (%.2f) \n", populationDensityWinner, populationDensityComparison);
+
+	int pibPerCapitaComparison = pibPerCapita > pibPerCapita2;
+	int pibPerCapitaWinner = pibPerCapitaComparison ? 1 : 2;
+	printf("PIB per Capita: Carta %d venceu (%.2f) \n", pibPerCapitaWinner, pibPerCapitaComparison);
+
+	superPower = population + area + pib + nTouristAttractions - populationDensity + pibPerCapita;
+	superPower2 = population2 + area2 + pib2 + nTouristAttractions2 - populationDensity2 + pibPerCapita2;
+	int superPowerComparison = superPower > superPower2;
+	int superPowerWinner = superPowerComparison ? 1 : 2;
+	printf("Super Poder: Carta %d venceu (%d) \n", superPowerWinner, superPowerComparison);
 
 	return 0;
 } 
